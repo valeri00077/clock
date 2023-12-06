@@ -19,7 +19,7 @@ numb = Array.from(numb)
 
 let changeCity = "Tbilisi";
 let change = 0;
-// let changeDate = 0;
+let changeHours = new Date();
 let formattedTime = new Date();
 
 function arrowRotate(){
@@ -51,6 +51,11 @@ function arrowRotate(){
                 let formattedLondonTime = londonTime.format(x)
                 formattedTime = new Date(formattedLondonTime)
                 // console.log(formattedTime.getDate())
+
+                let londonTimeTimeHours = x.toLocaleString("en-US", { timeZone: londonTimeZone,  timeStyle: "full", hour12: false})
+                changeHours = Number(londonTimeTimeHours.split(":")[0])
+                // console.log(changeHours)
+    
             }else if(dateitem1.indexOf(dateitem) === 2){
                 change = 9;
                 changeCity = "New york";
@@ -61,6 +66,10 @@ function arrowRotate(){
                 formattedTime = new Date(formattedUsaTime)
                 // console.log(formattedTime.getMinutes())
 
+                let usaTimeHours = x.toLocaleString("en-US", { timeZone: usaTimeZone,  timeStyle: "full", hour12: false})
+                changeHours = Number(usaTimeHours.split(":")[0])
+                // console.log(changeHours)
+
                 
             }else{
                 change = 0;
@@ -70,8 +79,12 @@ function arrowRotate(){
                 let tbilisiTime = new Intl.DateTimeFormat("en-US", {timeZone: tbilisiTimeZone})
                 let formattedTbilisiTime = tbilisiTime.format(x)
                 formattedTime  = new Date(formattedTbilisiTime)
-                // let amPM = tbilisiTime.format(new Date());
-                // console.log(formattedTime)
+                // console.log(formattedTime.getDay())
+
+                let tbilisiTimeHours = x.toLocaleString("en-US", { timeZone: tbilisiTimeZone,  timeStyle: "full", hour12: false})
+                changeHours = Number(tbilisiTimeHours.split(":")[0])
+                // console.log( changeHours)
+                
             }
             
         })
@@ -79,7 +92,7 @@ function arrowRotate(){
     });
     
     
-    if((x.getHours() - change) >= 6 && (x.getHours() - change) < 18){
+    if(changeHours >= 6 && changeHours < 18){
         number.style.backgroundColor = "#F5F5DC";
         number.style.transition = "1s";
         number.style.boxShadow = "2px 20px 20px 20px rgba(0, 0, 0, 0.522)";
